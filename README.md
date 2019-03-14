@@ -1,7 +1,7 @@
-#　このrepositoryについて
+# このrepositoryについて
 ## atcoder 用のlibrary
 
-#　内容
+# 内容
 - UnionFind(rank　実装)
 - UnionFind(size 実装)
 - FactMod(逆元を使った、階乗、組み合わせ数)
