@@ -33,5 +33,6 @@ class FactMod():
         '''
         nCrの値を返す
         '''
-        ret = self.f[n] * self.inv[n-r]*self.inv[r] % self.mod
+        ret = self.f[n] * self.inv[n-r]*self.inv[r]
+        ret %= self.mod
         return ret
