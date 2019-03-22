@@ -30,10 +30,10 @@ class UnionFind:
 
         if self.rank[x] < self.rank[y]:
             self.parent[x] = y
-            self.big[y] += self.big[x]
+            self.conN[x] += self.conN[x]
         else:
             self.parent[y] = x
-            self.big[x] += self.big[y]
+            self.conN[x] += self.conN[y]
             if self.rank[x] == self.rank[y]:
                 self.rank[x] += 1
 
@@ -66,7 +66,7 @@ class UnionFind:
         xが属している集合の要素のサイズを返す
         """
         p = self.find(x)
-        return self.conN(p)
+        return self.conN[p]
 
     def __str__(self):
         """
