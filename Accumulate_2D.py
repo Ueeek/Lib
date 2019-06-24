@@ -13,6 +13,12 @@ class ACC_2D:
         self.H = H
         self.mat = [[0]*(W+1) for _ in range(H+1)]
 
+    def __str__(self):
+        """
+        行列の中身が見たくなった時用
+        """
+        return "print mat\n"+"\n".join(map(str, [v for v in self.mat]))
+
     def add(self, row, col, val):
         """
         matの値を変更する(初期化)
@@ -21,7 +27,7 @@ class ACC_2D:
         val:mat[row][col]を初期化する値
         mat[row][col]+=val
         """
-        self.mat[row][col] += val
+        self.mat[row+1][col+1] += val
 
     def build(self):
         """
