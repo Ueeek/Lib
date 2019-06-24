@@ -9,6 +9,8 @@
 - LCA(lowest common ancsestor)
 - Primes(素数に関するもの)
 - TopologicalSort(トポロジカルソートしてくれる)
+- Segment Tree
+- ２次元累積和
 
 
 
