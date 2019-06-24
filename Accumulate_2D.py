@@ -11,7 +11,7 @@ class ACC_2D:
 
         self.W = W
         self.H = H
-        self.mat = [[0]*W for _ in range(H)]
+        self.mat = [[0]*(W+1) for _ in range(H+1)]
 
     def add(self, row, col, val):
         """
