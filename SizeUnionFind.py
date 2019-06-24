@@ -27,3 +27,6 @@ class UnionFind:
 
     def same(self, x, y):
         return self.find(x) == self.find(y)
+
+    def connectedNum(self, x):
+        return self.size[self.find[x]]

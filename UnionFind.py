@@ -4,11 +4,9 @@ class UnionFind:
         size:頂点の数
         parent[x]->parent of x
         rank[x] -> height of tree of x
-        conN[x] ->size of group which x belong with ->この処理は消しても動く。TLEなら消してみればいい
         """
         self.parent = [i for i in range(size)]
         self.rank = [0 for _ in range(size)]
-        self.conN = [1 for _ in range(size)]
 
     def find(self, x):
         """
@@ -30,10 +28,8 @@ class UnionFind:
 
         if self.rank[x] < self.rank[y]:
             self.parent[x] = y
-            self.conN[x] += self.conN[x]
         else:
             self.parent[y] = x
-            self.conN[x] += self.conN[y]
             if self.rank[x] == self.rank[y]:
                 self.rank[x] += 1
 
@@ -60,13 +56,6 @@ class UnionFind:
         連結成分の数を返す
         """
         return len(self.component())
-
-    def connectedNum(self, x):
-        """
-        xが属している集合の要素のサイズを返す
-        """
-        p = self.find(x)
-        return self.conN[p]
 
     def __str__(self):
         """
