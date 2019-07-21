@@ -4,17 +4,17 @@ class SegmentTree():
     segment tree
     '''
 
-    def __init__(self, _n, func, init=float('inf')):
+    def __init__(self, n, func, init=float('inf')):
         '''
-        _n->配列の長さ
+        n->配列の長さ
         func:func(a,b)->val,　func=minだとRMQになる
         木の高さhとすると,
         n:h-1までのノード数。h段目のノードにアクセスするために使う。
         data:ノード。
         parent:k->child k*2+1とk*2+2
         '''
-        self.n = 2**(_n-1).bit_length()
-        self.inf = init
+        self.n = 2**(n-1).bit_length()
+        self.init = init
         self.data = [init]*(2*self.n)
         self.func = func
 
@@ -49,7 +49,7 @@ class SegmentTree():
         '''
         L = l+self.n
         R = r+self.n
-        ret = self.inf
+        ret = self.init
         while L < R:
             if R & 1:
                 R -= 1
