@@ -1,9 +1,17 @@
 def topological_sort(V, E_in, E_from):
     '''
+    #Note
+    -----------------
     Order: O(|V|+|E|)
+
+    # parameters
+    ------------------
     V:N(node)
-    E_from:
-    E_in:
+    E_from: [ [ pointing nodes]]]
+    E_in:[[pointed nodes]]
+
+    # return
+    ret: list of node(topologycal sorted)
     '''
 
     # count num of pointed nodes for each nodes
