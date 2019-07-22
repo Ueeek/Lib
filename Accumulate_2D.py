@@ -1,12 +1,12 @@
 class ACC_2D:
     """
-    二次元累積わ
+    2Dimension accumulate
     """
 
     def __init__(self, W, H):
         """
-        W:幅
-        H:高さ
+        W:width
+        H:height
         """
 
         self.W = W
