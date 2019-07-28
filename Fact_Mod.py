@@ -36,3 +36,11 @@ class FactMod():
         ret = self.f[n] * self.inv[n-r]*self.inv[r]
         ret %= self.mod
         return ret
+
+    def perm(self, n, r):
+        """
+        nPrの値を返す
+        """
+        ret = self.f[n] * self.inv[n-r]
+        ret %= self.mod
+        return ret
