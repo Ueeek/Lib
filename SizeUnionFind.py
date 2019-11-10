@@ -8,12 +8,22 @@ class UnionFind:
         self.size = [1 for _ in range(N)]
 
     def find(self, x):
+        """
+        x: child
+        ret-> node
+        xのグループの代表を見つける
+        """
         if self.parent[x] == x:
             return x
         else:
             return self.find(self.parent[x])
 
     def union(self, x, y):
+        """
+        union (x ,y)
+        x,y: node
+        ret->None
+        """
         px = self.find(x)
         py = self.find(y)
         if px == py:
@@ -26,7 +36,19 @@ class UnionFind:
             self.size[px] += self.size[py]
 
     def same(self, x, y):
+        """
+        return true if x and y are in same group
+        """
         return self.find(x) == self.find(y)
 
     def connectedNum(self, x):
+        """
+        return size of the group x belong to
+        """
         return self.size[self.find(x)]
+
+    def is_connected(self):
+        """
+        return true is all node is in one group
+        """
+        return self.connectedNum(0) == len(self.parent)
