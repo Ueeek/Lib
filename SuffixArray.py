@@ -19,6 +19,7 @@ class SuffixArray:
 
     def build_suffix_array_sa_is(self):
         """
+        壊れてる気がするから使わない
         build SA with O(N)
         SA_IS algorithm
 

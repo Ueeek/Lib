@@ -57,3 +57,14 @@ class Dijkstra:
             たどり着けない場合は、float('inf')がかえる
         """
         return self.dist[d]
+    def get_path(self,dst):
+        """
+        startからdstまでのpathをlistでreturn
+        valifyしてないので怪しい
+        """
+        cur=dst
+        ret=[cur]
+        while cur!=self.start_node:
+            cur=self.prev[cur]
+            ret.append(cur)
+        return list(reversed(ret))

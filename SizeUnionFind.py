@@ -52,3 +52,12 @@ class UnionFind:
         return true is all node is in one group
         """
         return self.connectedNum(0) == len(self.parent)
+
+    def conpomentNum(self):
+        """
+        return num of component
+        """
+        par_set=()
+        for p in self.parent:
+            par_set.add(self.find(p))
+        return len(per_set())

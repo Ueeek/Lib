@@ -74,3 +74,31 @@ def primeFact(n):
     if n > 1:
         factors.append(n)
     return factors
+
+def calc_factors(N):
+    """
+    Nの約数をlistでreturn
+    """
+    i=1
+    factors=set()
+    while i*i<=N:
+        if N%i==0:
+            factors.add(i)
+            factors.add(N//i)
+        i+=1
+    return list(sorted(factors))
+
+def phi(n):
+    #オイラー関数
+    r = n
+    i = 2
+    while i * i <= n:
+        if n % i == 0:
+            r -= r // i
+            while n % i == 0:
+                n //= i
+        i += 1
+    if n > 1:
+        r -= r // n
+    return r
+
