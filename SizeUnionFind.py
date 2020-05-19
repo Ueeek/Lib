@@ -57,7 +57,7 @@ class UnionFind:
         """
         return num of component
         """
-        par_set=()
+        par_set=set()
         for p in self.parent:
             par_set.add(self.find(p))
-        return len(per_set())
+        return len(par_set())
