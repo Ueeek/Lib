@@ -1,8 +1,11 @@
 import sys#if RE->suspect recursion limit error
+from collections import deque
 sys.setrecursionlimit(10000)
-class FordFulkerson:
+
+class Dinic:
     """max-flow-min-cut
-    O(F|E|)
+    faster than ford-fulkerson algorithm
+    O(|V||E|)
     """
 
     def __init__(self,V:int):
@@ -13,7 +16,8 @@ class FordFulkerson:
         """
         self.V = V
         self.adj=[[] for _ in range(V)]
-        self.used=[False]*V
+        self.level=[-1]*self.V
+        self.iter=[-1]*self.V
 
     def add_edge(self,fro:int,to:int,cap:int):
         """
@@ -28,16 +32,36 @@ class FordFulkerson:
         #rev edge
         self.adj[to].append([fro,0,len(self.adj[fro])-1])
 
+    def bfs(self,s:int):
+        """ bfs from s
+        use deque to bfs
+        """
+        self.level=[-1]*self.V
+        Q=deque()
+        self.level[s]=0
+        Q.append(s)
+
+        while Q:
+            v = Q.pop()
+            for i in range(len(self.adj[v])):
+                (nex_id,nex_cap,nex_rev) = self.adj[v][i]
+                if nex_cap>0 and self.level[nex_id]<-0:
+                    self.level[nex_id] = self.level[v]+1
+                    Q.append(nex_id)
+
+
     def dfs(self,v,t,f):
+
         """
         search increasing path
         """
         if v==t:
             return f
-        self.used[v]=True
-        for i in range(len(self.adj[v])):
+
+        for i in range(self.iter[v],len(self.adj[v])):
+            self.iter[v]=i
             (nex_id,nex_cap,nex_rev) = self.adj[v][i]
-            if not self.used[nex_id] and nex_cap>0:
+            if nex_cap>0 and self.level[v]<self.level[nex_id]:
                 d = self.dfs(nex_id,t,min(f,nex_cap))
                 if d>0:
                     #decrease capacity to denote use it with d flow
@@ -53,7 +77,8 @@ class FordFulkerson:
         self.used = [False]*self.V
         #while no increasing path is found
         while True:
-            self.used = [False]*self.V
+            self.bfs(s)
+            self.iter=[0]*self.V
             f = self.dfs(s,t,float("inf"))
             if f==0:
                 return flow
@@ -61,7 +86,7 @@ class FordFulkerson:
                 flow+=f
 
 ##usage
-#F = FordFulkerson(N+1)
+#F = Dinic(N+1)
 #for a,b in edges:
 #    F.add_edge(a,b,1)
 #    F.add_edge(b,a,1)
