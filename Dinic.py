@@ -4,7 +4,7 @@ sys.setrecursionlimit(10000)
 
 class Dinic:
     """max-flow-min-cut
-    faster than ford-fulkerson algorithm
+    faster than ford-fulkerson algorithm(多分そんなに変わらないはず)
     O(|V||E|)
     """
 
