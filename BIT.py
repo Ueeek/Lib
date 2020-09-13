@@ -40,7 +40,7 @@ class BIT:
         """
         L[i] += x
         """
-        while i < self.size:
+        while i <= self.size:
             self.L[i] += x
             i += i & (-i)
 
