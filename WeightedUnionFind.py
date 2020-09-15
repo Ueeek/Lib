@@ -5,6 +5,8 @@ class WeightedUnionFind:
 
     def __init__(self, n):
         """
+        :param:n size of nodes
+
         par : show parent of each node
         rank : show height
         weight: dist from root to the node
@@ -15,7 +17,7 @@ class WeightedUnionFind:
 
     def find(self, x):
         """
-        search parent of node x
+        :param: x=> search parent of node x
         """
         if self.par[x] == x:
             return x
@@ -28,6 +30,10 @@ class WeightedUnionFind:
 
     def union(self, x, y, w):
         """
+        x: node
+        y: node
+        w: weight
+
         Union
         w->weight from x to y
         """
@@ -47,6 +53,9 @@ class WeightedUnionFind:
 
     def same(self, x, y):
         """
+        x:node
+        y: node
+
         Are x ,y in same Group?
         bool
         """
@@ -55,6 +64,9 @@ class WeightedUnionFind:
     # xからyへのコスト
     def diff(self, x, y):
         """
+        x: node
+        y: node
+
         x->yのcost
         """
         return self.weight[x] - self.weight[y]
