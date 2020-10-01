@@ -1,4 +1,3 @@
-INF=10**18
 class MinCostFlow:
     """
     """
@@ -33,9 +32,9 @@ class MinCostFlow:
         """
 
         res=0
-        #最短路の前のedgeを記録する。
-        prevv=[0]*self.V
-        preve=[0]*self.V
+        #最短路の前のnodeを記録する。
+        prevv=[0]*self.V #prev_node id
+        preve=[0]*self.V #prev_edge id to reach prev_node
 
         V = self.V
 
@@ -62,15 +61,18 @@ class MinCostFlow:
                 return -1
 
             d = f
+
             v = t
             while v!=s:
+                #最短路のうち、min_capacity分を流す
                 d = min(d, self.adj[prevv[v]][preve[v]][1])
                 v = prevv[v]
-
             f -=d
+
             res += d*dist[t]
 
             v=t
+            #流した分だけ、capacityを更新する
             while v!=s:
                 e = self.adj[prevv[v]][preve[v]]
                 e[1]-=d
@@ -81,3 +83,12 @@ class MinCostFlow:
         return res
                 
 
+
+
+
+#sample
+#N,K = map(int,input().split())
+#MCF = MinCostFlow(2*N+2)
+#s=2*N
+#g=2*N+1
+#MCF.add_edge(s,g,INF,0) #これがあることで、s->gでダイレクトにいける。一つも選ばない。ができる?
