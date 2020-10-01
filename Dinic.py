@@ -2,6 +2,7 @@ import sys#if RE->suspect recursion limit error
 from collections import deque
 sys.setrecursionlimit(10000)
 
+#なんか、ford-fulkersonの方が、早いんだが。
 class Dinic:
     """max-flow-min-cut
     faster than ford-fulkerson algorithm(多分そんなに変わらないはず)
