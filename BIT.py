@@ -28,7 +28,6 @@ class BIT:
         return ret
 
     def range_sum(self, l, r):
-        
         """
         idx周りが怪しい?
         sum[l,r)
@@ -44,25 +43,26 @@ class BIT:
             self.L[i] += x
             i += i & (-i)
 
-    def bisect(self,k:float)->int:
+    def bisect(self, k: float) -> int:
         """ binary search on BIT
         get index x s.t self.sum(,)>=k
 
         RETURN:
             res:index of x
         """
-        k+=1 #convert k into 1-index
+        k += 1  # convert k into 1-index
 
-        res=0
-        N=1
-        while N<self.size:
-            N*=2
+        res = 0
+        N = 1
+        while N < self.size:
+            N *= 2
 
-        i=N//2
-        while i>0:
-            if(res+i<self.size and self.L[res+i]<k): #move to rignt on tree
-                k-=self.L[res+i]
-                res+=i
-            #else move to left
-            i//=2
+        i = N//2
+        while i > 0:
+            # move to rignt on tree
+            if(res+i < self.size and self.L[res+i] < k):
+                k -= self.L[res+i]
+                res += i
+            # else move to left
+            i //= 2
         return res+1
