@@ -94,3 +94,17 @@ class SegmentTree():
                 x=2*x+2
         return x-self.n+1 #seg木のidxから、元のlistのidxに変換
 
+    def __str__(self):
+        """
+        print data_array(leaf of tree)
+        """
+        ret=""
+        for i in range(self.n):
+            ret+="{} ".format(self.data[i+self.n-1])
+        return ret
+
+    def __getitem__(self,key):
+        """
+        print data_array[i](lead of tree)
+        """
+        return self.data[key+self.n-1]
