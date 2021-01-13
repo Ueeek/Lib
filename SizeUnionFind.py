@@ -60,4 +60,4 @@ class UnionFind:
         par_set=set()
         for p in self.parent:
             par_set.add(self.find(p))
-        return len(par_set())
+        return len(par_set)
