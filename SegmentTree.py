@@ -4,7 +4,7 @@ class SegmentTree():
     segment tree
     '''
 
-    def __init__(self, n, func, init=float('inf')):
+    def __init__(self, n:int, func=lambda x,y:max(x,y), init=float('inf')):
         '''
         n->配列の長さ
         func:func(a,b)->val,　func=minだとRMQになる
@@ -18,13 +18,21 @@ class SegmentTree():
         self.data = [init]*(2*self.n)
         self.func = func
 
-    def set(self, i, v):
+    def set(self, i:int, v:int):
         '''
         leafの初期化
         i: 0-origin idx
         v: value
         '''
         self.data[i+self.n-1] = v
+
+    def set_list(self,A:list):
+        """
+        leafの初期化
+        list_version
+        """
+        for i,a in enumerate(A):
+            self.set(i,a)
 
     def build(self):
         '''
@@ -34,7 +42,7 @@ class SegmentTree():
         for k in reversed(range(self.n-1)):
             self.data[k] = self.func(self.data[k*2+1], self.data[k*2+2])
 
-    def update(self, k, a):
+    def update(self, k:int, a:int):
         '''
         data[k]=aに更新する。
         更新をrootまで更新
@@ -46,10 +54,14 @@ class SegmentTree():
             k = (k-1)//2 #goto its parent
             self.data[k] = self.func(self.data[k*2+1], self.data[k*2+2]) #update
 
-    def query(self, l, r):
+    def query(self, l=None,r=None):
         '''
         [l,r)のfuncを求める
         '''
+        if l is None:
+            l=0
+        if r is None:
+            r=self.n
         L = l+self.n
         R = r+self.n
         ret = self.init
@@ -65,7 +77,7 @@ class SegmentTree():
         return ret
 
 
-    def lower_bound_index(self,x,v):
+    def lower_bound_index(self,x:int,v:int):
         """
         x:0-origin
         [x,N)の範囲で、v<=data[j]を満たす最小のjを探す(二分探索)

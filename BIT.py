@@ -66,3 +66,13 @@ class BIT:
             # else move to left
             i //= 2
         return res+1
+
+## sample_　転倒数
+#N = int(input())
+#A = list(map(int,input().split()))
+#
+#B = BIT(N)
+#K = 0
+#for i in range(N):
+#    K += i - B.sum(A[i]+1) 
+#    B.add(A[i]+1,1)
