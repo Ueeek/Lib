@@ -49,3 +49,19 @@ class FactMod():
         """
         return (x*pow(y,self.mod-2,self.mod))%self.mod
 
+"""
+FactMod(N,MOD)のNの値が大きいと、前計算が重くて、動かない。
+nCrのrが小さいという保証があるなら、以下のコードでも、十分早いはず
+"""
+def comb(n,r,MOD):
+    """
+    nCr=\frac{\Pi_{i=0}^{i=r-1}(n-i)}{\Pi_{i=1}^{i=r}(i)}
+    """
+    ret=1
+    for i in range(r):#分子の計算
+        ret*=(n-i)
+        ret%=MOD
+    for i in range(2,r+1):#分母の計算(powでinv(i)を求める。)
+        ret*=pow(i,MOD-2,MOD)
+        ret%=MOD
+    return ret

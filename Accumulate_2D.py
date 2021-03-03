@@ -3,10 +3,10 @@ class ACC_2D:
     2Dimension accumulate
     """
 
-    def __init__(self, W, H):
+    def __init__(self, H, W):
         """
-        W:width
         H:height
+        W:width
         """
 
         self.W = W
@@ -32,6 +32,7 @@ class ACC_2D:
     def build(self):
         """
         累積和を計算する
+        (変更のたびにbuild)
         """
         for row in range(1, self.H+1):
             for col in range(1, self.W+1):

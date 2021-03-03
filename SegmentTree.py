@@ -117,6 +117,12 @@ class SegmentTree():
 
     def __getitem__(self,key):
         """
-        print data_array[i](lead of tree)
+        get data of key-th leaf
         """
         return self.data[key+self.n-1]
+    
+    def get(self,pos):
+        """
+        get data of pos-th leaf
+        """
+        return self.date[pos+self.n-1]
