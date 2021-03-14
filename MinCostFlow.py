@@ -1,5 +1,7 @@
 class MinCostFlow:
     """
+    最小費用流問題
+    (ある流量Fを流した時のcostの最小値を求める)
     """
 
     def __init__(self,V:int):
@@ -85,10 +87,13 @@ class MinCostFlow:
 
 
 
+"""
+# Memo
+## テク
+* s->gにinfの辺を張る
+* 最大化の時、edge_costを(INF-val)にして、答えは、(FLOW*INF-min_cost_flow(s,g,FLOW))
 
-#sample
-#N,K = map(int,input().split())
-#MCF = MinCostFlow(2*N+2)
-#s=2*N
-#g=2*N+1
-#MCF.add_edge(s,g,INF,0) #これがあることで、s->gでダイレクトにいける。一つも選ばない。ができる?
+
+##重み付き2部マッチング
+* https://atcoder.jp/contests/abc195/submissions/20923368
+"""
