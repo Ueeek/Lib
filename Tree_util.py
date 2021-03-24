@@ -33,3 +33,49 @@ def tree_dfs_generator(adj,root):
     for dep,idx in depth_K:
         yield (dep,idx)
 
+def tree_diameter(adj):
+    """
+    木の直径を求める
+    *適当なところから一番遠い頂点を求める。
+    * そいつから一番遠い頂点までの距離が直径
+
+    Arguments:
+        adj: 木を構成する隣接リスト
+    Return:
+        diamter: 木の直径(int)
+    """
+
+    N = len(adj)
+
+    #適当な頂点からdfs
+    depth1=[None]*N
+    root1=0
+    depth1[root1]=0
+    used1={root1}
+    Q1=[root1]
+
+    while Q1:
+        cur = Q1.pop()
+        for nex in adj[cur]:
+            if nex in used1:
+                continue
+            depth1[nex]=depth1[cur]+1
+            Q1.append(nex)
+            used1.add(nex)
+
+    root2 = depth1.index(max(depth1))
+    depth2=[None]*N
+    depth2[root2]=0
+    used2={root2}
+    Q2=[root2]
+
+    while Q2:
+        cur = Q2.pop()
+        for nex in adj[cur]:
+            if nex in used2:
+                continue
+            depth2[nex]=depth2[cur]+1
+            Q2.append(nex)
+            used2.add(nex)
+
+    return max(depth2)
