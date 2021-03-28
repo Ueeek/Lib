@@ -1,5 +1,6 @@
 # python template for atcoder1
 from functools import reduce
+from collections import defaultdict
 import sys
 sys.setrecursionlimit(10**9)
 input = sys.stdin.readline
@@ -38,10 +39,6 @@ def list_lcm(l):
     return reduce(lcm, l)
 
 
-n = int(input())
-l = list(map(int, input().split()))
-print(list_lcm(l))
-
 
 def primes(N):
     '''
@@ -61,18 +58,18 @@ def primes(N):
 
 def primeFact(n):
     """
-    nの素因数をlistで返す
+    nの素因数をdefaultdictで返す
     """
-    factors = []
+    factors=defaultdict(int)
     i = 2
     while i*i <= n:
         if n % i == 0:
             n //= i
-            factors.append(i)
+            defaultdict[i]+=1
         else:
             i += 1
     if n > 1:
-        factors.append(n)
+        defaultdict[n]+=1
     return factors
 
 def calc_factors(N):
