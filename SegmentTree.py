@@ -125,4 +125,4 @@ class SegmentTree():
         """
         get data of pos-th leaf
         """
-        return self.date[pos+self.n-1]
+        return self.data[pos+self.n-1]

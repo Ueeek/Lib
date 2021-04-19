@@ -15,24 +15,24 @@ class ACC_2D:
 
     def __str__(self):
         """
-        行列の中身が見たくなった時用
+        print 2d matrix
         """
         return "print mat\n"+"\n".join(map(str, [v for v in self.mat]))
 
     def add(self, row, col, val):
         """
-        matの値を変更する(初期化)
-        row:たて(0<=row<H)
-        col:横(0<=col<W)
-        val:mat[row][col]を初期化する値
         mat[row][col]+=val
+
+        row:(0<=row<H)
+        col:(0<=col<W)
+        val:val
         """
         self.mat[row+1][col+1] += val
 
     def build(self):
         """
-        累積和を計算する
-        (変更のたびにbuild)
+        compute_accumulate
+        call this every time aftere "add"
         """
         for row in range(1, self.H+1):
             for col in range(1, self.W+1):
@@ -41,7 +41,7 @@ class ACC_2D:
 
     def get_val(self, g_row, g_col, s_row, s_col):
         """
-        ２点で囲まれる長方形の、累積和を求める
-        gx,gyは含まれない
+        get acculumate val of rectangle [s_row,s_col]=>(g_row,g_col)
+        val of (g_row,g_col) is out of summation
         """
         return self.mat[g_row][g_col] - self.mat[s_row][g_col] - self.mat[g_row][s_col] + self.mat[s_row][s_col]
