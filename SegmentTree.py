@@ -65,18 +65,18 @@ class SegmentTree():
             r=self.n
         L = l+self.n
         R = r+self.n
-        ret = self.init
 
+        ret_l,ret_r = self.init,self.init
         while L < R:
             if R & 1: #R%2==1 
                 R -= 1
-                ret = self.func(self.data[R-1],ret) #親が丸々区間に含まれない->はみ出したところを更新
+                ret_r = self.func(self.data[R-1],ret_r) #親が丸々区間に含まれない->はみ出したところを更新
             if L & 1:
-                ret = self.func(ret, self.data[L-1])
+                ret_l = self.func(ret_l,self.data[L-1])
                 L += 1
             L >>= 1 #to parent
             R >>= 1
-        return ret
+        return self.func(ret_l,ret_r)
 
 
     def lower_bound_index(self,x:int,v:int):
@@ -129,3 +129,28 @@ class SegmentTree():
         """
         return self.data[pos+self.n-1]
 
+
+
+N,Q = map(int,input().split())
+F=[list(map(int,input().split())) for _ in range(N)]
+MOD=998244353
+
+def f(x,y):
+    x0,x1 = x
+    y0,y1 = y
+    return (x0*y0%MOD,(y0*x1+y1)%MOD)
+Seg = SegmentTree(N,func=f,init=(1,0))
+
+Seg.set_list(F)
+Seg.build()
+
+for _ in range(Q):
+    q = list(map(int,input().split()))
+    if q[0]==0:
+        _,p,c,d = q
+        Seg.update(p,(c,d))
+    else:
+        _,l,r,x = q
+        a,b = Seg.query(l,r)
+        ans = (a*x+b)%MOD
+        print(ans)
