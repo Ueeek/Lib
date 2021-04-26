@@ -15,7 +15,8 @@ class SegmentTree():
         '''
         self.n = 2**(n-1).bit_length()
         self.init = init
-        self.data = [init]*(2*self.n)
+        #self.data = [init]*(2*self.n)
+        self.data = [init for _ in range(2*self.n)]
         self.func = func
 
     def set(self, i:int, v:int):
@@ -65,10 +66,11 @@ class SegmentTree():
         L = l+self.n
         R = r+self.n
         ret = self.init
+
         while L < R:
             if R & 1: #R%2==1 
                 R -= 1
-                ret = self.func(ret, self.data[R-1]) #親が丸々区間に含まれない->はみ出したところを更新
+                ret = self.func(self.data[R-1],ret) #親が丸々区間に含まれない->はみ出したところを更新
             if L & 1:
                 ret = self.func(ret, self.data[L-1])
                 L += 1
@@ -126,3 +128,4 @@ class SegmentTree():
         get data of pos-th leaf
         """
         return self.data[pos+self.n-1]
+

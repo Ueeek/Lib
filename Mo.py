@@ -8,6 +8,7 @@ class Mo:
     """
     updateがない
     queryを先読みできる
+    区間に何種類のものがある?みたいな時に使いやすそう
     """
 
     def __init__(self, L):
