@@ -3,6 +3,7 @@ import bisect
 
 
 class SuffixArray:
+    "not verified. yosupo judge見てTODO"
     """
     Suffix Array:
         search query words from sentences
@@ -175,15 +176,13 @@ class SuffixArray:
 
 
 if __name__ == "__main__":
-    S = "nonsense"
-    S = "mmiissiissiippii"
+    S = input()
     SA = SuffixArray(S)
-    SA.build_suffix_array_naive()
-    #print("naive=>", SA.suffix_array)
-    # SA.build_suffix_array_manber_mayers()
-    #print("manver_mayers=>", SA.suffix_array)
-    # SA.build_suffix_array_sa_is()
-    #print("sa-is=>", SA.suffix_array)
-    ret = SA.search("nse")
-    ret = SA.search("ppii")
-    print(ret)
+    #SA.build_suffix_array_naive()
+    #SA.build_suffix_array_manber_mayers()
+    SA.build_suffix_array_sa_is()
+
+    ans = []
+    for pos,val in SA.suffix_array[1:]:
+        ans.append(pos)
+    print(" ".join(map(str,ans)))
