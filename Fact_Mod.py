@@ -1,5 +1,7 @@
+#https://atcoder.jp/contests/tenka1-2014-final-open/submissions/12838089 "12写像乗ってそう
+#強いので参考にしたい
 # -*- coding: utf-8 -*-
-class FactMod():
+class FactMod:
     '''
     modの値が素数の時のfactと組み合わせを求める
     フェルマーの小定理を用いているため、modが素数以外の時は使えない
@@ -7,7 +9,7 @@ class FactMod():
     NとかRの値が固定なら、combとか、複数回呼び出すより先に、計算してしまってlistとかで持っておく方が良い。(TLE対策)
     '''
 
-    def __init__(self, n, mod):
+    def __init__(self, n, mod=10**9+7):
         '''
         コンストラクタ
         f:nまでの i!の値を　配列に入れる
@@ -27,28 +29,51 @@ class FactMod():
         '''
         n!の値を返す
         '''
-        assert n>=0
+        if n<0:
+            raise NotImplementedError
+            return 0
         return self.f[n]
 
     def comb(self, n, r):
         '''
         nCrの値を返す
         '''
-        #assert n>=r>=0
+        if not(0<=r<=n):
+            raise NotImplementedError
+            return 0
+
         if r==0:
             return 1
         ret = self.f[n] * self.inv_f[n-r]*self.inv_f[r]
         ret %= self.mod
         return ret
 
+
+
     def perm(self, n, r):
         """
         nPrの値を返す
         """
-        assert n>=r>=0
+        if not(0<=r<=n):
+            raise NotImplementedError
+            return 0
         ret = self.f[n] * self.inv_f[n-r]
         ret %= self.mod
         return ret
+
+    def binomial(self,n,k):
+        """
+        二項係数を計算する
+        :return: (n,k)
+        """
+        if n-k<0:
+            raise NotImplementedError
+            return 0
+        ret = self.f[n]*self.inv_f[k]*self.inv_f[n-k]
+        ret %= self.mod
+        return ret
+
+
 
     def div(self,x,y):
         """
