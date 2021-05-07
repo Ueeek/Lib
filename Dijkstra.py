@@ -2,6 +2,9 @@ from collections import defaultdict
 import heapq
 
 
+#ADJの方が圧倒的に早い感
+#(matの受け渡しが辛い?)
+
 class Dijkstra:
     """
     dijkstraの最短経路問題を解く
