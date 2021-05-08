@@ -10,12 +10,16 @@ class BIT:
     #material http://hos.ac/slides/20140319_bit.pdf
     """
 
-    def __init__(self, N, init_val=0):
+    init_val: int
+    size: int
+    L: list[int]
+
+    def __init__(self, N: int, init_val: int = 0) -> None:
         self.init_val = init_val
         self.size = N
         self.L = [init_val]*(N+1)
 
-    def sum(self, r):
+    def sum(self, r: int) -> int:
         """
         sum[,r)
         calc sum from L[0] to L[r-1]
@@ -27,7 +31,7 @@ class BIT:
 
         return ret
 
-    def range_sum(self, l, r):
+    def range_sum(self, l: int, r: int) -> int:
         """
         idx周りが怪しい?
         sum[l,r)
@@ -35,7 +39,7 @@ class BIT:
         """
         return self.sum(r-1)-self.sum(l-1)
 
-    def add(self, i, x):
+    def add(self, i: int, x: int) -> None:
         """
         L[i] += x
         """
@@ -43,7 +47,7 @@ class BIT:
             self.L[i] += x
             i += i & (-i)
 
-    def bisect(self, k: float) -> int:
+    def bisect(self, k: int) -> int:
         """ binary search on BIT
         get index x s.t self.sum(,)>=k
 
@@ -67,12 +71,12 @@ class BIT:
             i //= 2
         return res+1
 
-## sample_　転倒数
+# sample_　転倒数
 #N = int(input())
 #A = list(map(int,input().split()))
 #
 #B = BIT(N)
 #K = 0
-#for i in range(N):
-#    K += i - B.sum(A[i]+1) 
+# for i in range(N):
+#    K += i - B.sum(A[i]+1)
 #    B.add(A[i]+1,1)

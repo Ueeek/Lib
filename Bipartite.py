@@ -1,4 +1,4 @@
-def is_bipartite(graph):
+def is_bipartite(graph: list[list[int]]) -> bool:
     """
     return True is graph is bipartite.
 
@@ -8,13 +8,13 @@ def is_bipartite(graph):
         * no multi edge
         * graph[i][i]=0
     """
-    N = len(graph)
-    _N = len(graph[0])
+    N: int = len(graph)
+    _N: int = len(graph[0])
     assert N == _N  # graph must be square matrix
 
     # unvisited=0
     # visited= 1 or-1
-    visited = [0]*N
+    visited: list[int] = [0]*N
     visited[0] = 1
     Q = [0]
     while Q:
