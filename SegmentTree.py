@@ -131,26 +131,3 @@ class SegmentTree():
 
 
 
-N,Q = map(int,input().split())
-F=[list(map(int,input().split())) for _ in range(N)]
-MOD=998244353
-
-def f(x,y):
-    x0,x1 = x
-    y0,y1 = y
-    return (x0*y0%MOD,(y0*x1+y1)%MOD)
-Seg = SegmentTree(N,func=f,init=(1,0))
-
-Seg.set_list(F)
-Seg.build()
-
-for _ in range(Q):
-    q = list(map(int,input().split()))
-    if q[0]==0:
-        _,p,c,d = q
-        Seg.update(p,(c,d))
-    else:
-        _,l,r,x = q
-        a,b = Seg.query(l,r)
-        ans = (a*x+b)%MOD
-        print(ans)

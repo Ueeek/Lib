@@ -65,11 +65,11 @@ def primeFact(n):
     while i*i <= n:
         if n % i == 0:
             n //= i
-            defaultdict[i]+=1
+            factors[i]+=1
         else:
             i += 1
     if n > 1:
-        defaultdict[n]+=1
+        factors[n]+=1
     return factors
 
 def calc_factors(N):

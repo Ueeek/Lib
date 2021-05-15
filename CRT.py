@@ -1,25 +1,26 @@
 #/ref https://atcoder.jp/contests/abc193/submissions/20516429
+import typing
 def _inv_gcd(a: int, b: int) -> tuple:
     a %= b
     if a == 0:
         return(b, 0)
     s = b
     t = a
-    m0 = 0
+    mod0 = 0
     m1 = 1
 
     while t:
         u = s//t
         s -= t*u
-        m0 -= m1*u
+        mod0 -= m1*u
         s, t = t, s
-        m0, m1 = m1, m0
-    if m0 < 0:
-        m0 += b//s
-    return(s, m0)
+        mod0, m1 = m1, mod0
+    if mod0 < 0:
+        mod0 += b//s
+    return(s, mod0)
 
 
-def CRT(R: list, M: list):
+def CRT(remainders: typing.List[int], modulos: typing.List[int])->typing.Tuple[int,int]:
     """
     Chinese Remainder Theorem
 
@@ -29,39 +30,39 @@ def CRT(R: list, M: list):
 
         all_same(x%ri(mod mi) for i in range(len(r)))
     Return:
-        x: s.t x==ri(mod mi)  for all i in range(len(r))(0<x<lcm)
-        lcm: lcm of list m(if 0, anser is not exisis)
-    """
-    assert len(R) == len(M)
+        x: s.t x==ri(mod mi)  for all i in range(len(r))(0<x<lcm) 全ての条件を満たすxの値
+        lcm: lcm of list m(if 0, anser is not exisis) #全てのmodに対 x=0の時、x=lcmの倍数説があるので注意 (xはlcmでmod撮られてる)というか、周期lcm
+        """
+    assert len(remainders) == len(modulos)
 
-    N = len(R)
+    N = len(remainders)
 
     #2-var CRTを繰り返し適応していく。一つ目を(r,m)=(0,1)としておく。(単位元的な)
-    r0 = 0
-    m0 = 1
+    rem0 = 0
+    mod0 = 1
 
-    #Contracts: 0<=r0<m0
+    #Contracts: 0<=rem0<mod0
 
     for i in range(N):
-        assert 1 <= M[i]
-        r1 = R[i] % M[i]
-        m1 = M[i]
-        if m0 < m1:
-            r0, r1 = r1, r0
-            m0, m1 = m1, m0
-        if m0 % m1 == 0:
-            if r0 % m1 != r1:
+        assert 1 <= modulos[i]
+        rem1 = remainders[i] % modulos[i]
+        mod1 = remainders[i]
+        if mod0 < mod1:
+            rem0, rem1 = rem1, rem0
+            mod0, mod1 = mod1, mod0
+        if mod0 % mod1 == 0:
+            if rem0 % mod1 != rem1:
                 return (0, 0)
             continue
 
-        g, im = _inv_gcd(m0, m1)
-        u1 = m1//g
+        g, im = _inv_gcd(mod0, mod1)
+        u1 = mod1//g
 
-        if (r1-r0) % g:
+        if (rem1-rem0) % g:
             return (0, 0)
-        x = (r1-r0)//g % u1*im % u1
-        r0 += x*m0
-        m0 *= u1
-        if r0 < 0:
-            r0 += m0
-    return (r0, m0)
+        x = (rem1-rem0)//g % u1*im % u1
+        rem0 += x*mod0
+        mod0 *= u1
+        if rem0 < 0:
+            rem0 += mod0
+    return (rem0, mod0)

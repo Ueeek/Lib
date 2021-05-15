@@ -2,7 +2,7 @@ class Compress:
     """
     座標圧縮
     """
-    def __init__(self,L:list[int],keep_greater=True):
+    def __init__(self,L:typing.List[int],keep_greater=True):
         """
         :param: L: 圧縮するlist
         :param: keep_greater:　圧縮前の大小関係を保存する?
@@ -18,10 +18,10 @@ class Compress:
             if l in self.num2comp_idx:
                 continue
             else:
-                self.num2comp_idx[l] = self.num2comp_idx
+                self.num2comp_idx[l] = len(self.num2comp_idx)
                 self.comm_idx2num[self.num2comp_idx[l]]=l
 
-    def compress(self,L:list[int]):
+    def compress(self,L:typing.List[int]):
         """
         :parapm: list[int]
 
@@ -30,7 +30,7 @@ class Compress:
         ret = [self.num2comp_idx[l] for l in L]
         return ret
 
-    def decomporess(self,compressL:list[int]):
+    def decomporess(self,compressL:typing.List[int]):
         """
         :parap: compressL
         
