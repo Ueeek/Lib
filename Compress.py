@@ -1,3 +1,4 @@
+import typing
 class Compress:
     """
     座標圧縮

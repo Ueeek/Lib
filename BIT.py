@@ -12,7 +12,7 @@ class BIT:
 
     init_val: int
     size: int
-    L: list[int]
+    L: list
 
     def __init__(self, N: int, init_val: int = 0) -> None:
         self.init_val = init_val
