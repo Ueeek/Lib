@@ -15,6 +15,7 @@ class Dijkstra:
         adj: adj[a]=[(b,dist)]
         num_node: num of nodes
         dist: dist from start_node
+        num_shortest: そのノードに到達する最短路の数
         prev: 最短経路において、一つ前のノードを記憶。経路復元に使う?
         """
         self.start_node = start
@@ -22,9 +23,11 @@ class Dijkstra:
         self.num_node = num_node
         self.dist = [float('inf')]*num_node
         self.prev = defaultdict(lambda: None)
+        self.num_shortest = [0]*num_node
 
         # dist form S to S = 0
         self.dist[start] = 0
+        self.num_shortest[start]=1
 
     def calc_dist(self):
         """
@@ -48,7 +51,11 @@ class Dijkstra:
                 if self.dist[nex] > cand:  # update
                     self.dist[nex] = cand
                     self.prev[nex] = node
+                    self.num_shortest[nex] = self.num_shortest[node]
                     heapq.heappush(Q, cand*self.num_node+nex)
+                elif self.dist[nex]==cand:
+                    self.num_shortest[nex] += self.num_shortest[node]
+                    #TODO maybe this value be large
 
     def get_dist(self, d):
         """
@@ -62,6 +69,8 @@ class Dijkstra:
         startからdstまでのpathをlistでreturn
         valifyしてないので怪しい
         """
+        if self.dist[dst]==float("inf"):
+            return []
         cur=dst
         ret=[cur]
         while cur!=self.start_node:

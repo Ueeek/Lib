@@ -4,7 +4,7 @@ class ACC_2D:
     """
     W: int
     H: int
-    mat: list[list[int]]
+    #mat: list[list[int]]
 
     def __init__(self, H: int, W: int) -> None:
         """
