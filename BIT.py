@@ -19,6 +19,15 @@ class BIT:
         self.size = N
         self.L = [init_val]*(N+1)
 
+    def __getitem__(self, idx:int)->int:
+        # TODO: can be more effective
+        return self.range_sum(idx,idx+1)
+
+    def __str__(self)->str:
+        L = [self[i] for i in range(self.size)]
+        return " ".join(map(str,L))
+
+
     def sum(self, r: int) -> int:
         """
         sum[,r)
@@ -53,9 +62,8 @@ class BIT:
 
         RETURN:
             res:index of x
-        """
-        k += 1  # convert k into 1-index
 
+        """
         res = 0
         N = 1
         while N < self.size:
