@@ -9,6 +9,86 @@
 * adjを引数に持ってるやつは、globalにadjを持っておけば必要ないせつ
 """
 
+from typing import *
+
+def get_child(adj:List[List[int]],root:int)-> List[List[int]]:
+    """
+    RETURN:
+        child[i] = list of index of child nodes of i
+    """
+
+    N = len(adj)
+    visited = set()
+    parent=[-1]*N
+    child = [[] for _ in range(N)]
+
+    visited.add(root)
+    Q = [root]
+
+    while Q:
+        cur = Q.pop()
+        for nex in adj[cur]:
+            if nex in visited:
+                continue
+            else:
+                Q.append(nex)
+                child[cur].append(nex)
+                visited.add(nex)
+    return child
+
+def get_parent(adj:List[List[int]],root:int)-> List[int]:
+    """
+    RETURN:
+        parent[i]: parent node idx of node i
+    """
+
+    child = get_child(adj,root)
+    N = len(adj)
+
+    parent = [-1]*N
+    for par in range(N):
+        for chi in child[par]:
+            parent[chi] = par
+            
+    return parent
+
+
+def post_order_traversal_gelnerator(adj:List[List[int]],root:int):
+    """
+    再帰なしで post_order_traversal
+
+    Return:
+        post_order_traversal の順番にreturn
+    """
+
+
+    child = get_child(adj,root)
+
+    Q = [root]
+    visited = set()
+
+    while Q:
+        cur = Q.pop()
+
+        if cur in visited:
+            continue
+
+        if len(child[cur])==0:
+            #leaf
+            yield cur
+            visited.add(cur)
+
+        elif all(chi in visited for chi in child[cur]):
+            #all child is visited
+            yield cur
+            visited.add(cur)
+
+        else:
+            Q.append(cur)
+            for chi in child[cur]:
+                if chi in visited:
+                    continue
+                Q.append(chi)
 
 def tree_dfs_generator(adj, root):
     """
