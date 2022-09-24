@@ -19,7 +19,6 @@ def get_child(adj:List[List[int]],root:int)-> List[List[int]]:
 
     N = len(adj)
     visited = set()
-    parent=[-1]*N
     child = [[] for _ in range(N)]
 
     visited.add(root)
